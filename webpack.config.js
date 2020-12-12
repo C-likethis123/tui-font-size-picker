@@ -13,7 +13,7 @@ function getOutputConfig(isProduction, isCDN, minify) {
 
   if (!isProduction || isCDN) {
     const config = {
-      library: ["toastui", "Editor", "plugin", "fontSize"],
+      library: ["toastui", "Editor", "plugin", "font-size"],
       libraryExport: "default",
       libraryTarget: "umd",
       path: path.resolve(__dirname, "dist/cdn"),
@@ -58,7 +58,7 @@ module.exports = (env, argv) => {
   const isCDN = !!argv.cdn;
   const config = {
     mode: isProduction ? "production" : "development",
-    entry: "./src/js/index.js",
+    entry: "./src/index.js",
     output: getOutputConfig(isProduction, isCDN, minify),
     module: {
       rules: [

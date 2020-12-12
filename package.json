@@ -11,7 +11,7 @@
     "plugin",
     "font size"
   ],
-  "main": "dist/toastui-editor-plugin-underline.js",
+  "main": "dist/toastui-editor-plugin-font-size.js",
   "files": [
     "dist/*.js",
     "index.d.ts"
