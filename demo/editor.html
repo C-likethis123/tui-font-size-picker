@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8" />
+  <title>Demo - Font Size Plugin</title>
+  <!-- Editor's Dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.33.0/codemirror.css" />
+</head>
+
+<body>
+  <div class="code-html">
+    <h1 style="font-family: Arial, Helvetica, sans-serif;">Demo - Font Size Plugin</h1>
+    <div id="editor"></div>
+  </div>
+  <!-- Plugin -->
+  <script src="../dist/cdn/toastui-editor-plugin-underline.js"></script>
+  <!-- Editor -->
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+</body>
+<script class="code-js">
+  const { Editor } = toastui;
+  const editor = new Editor({
+    el: document.querySelector('#editor'),
+    previewStyle: 'vertical',
+    height: '500px',
+    initialEditType: 'wysiwyg',
+    initialValue: 'Hello!',
+  });
+</script>
+</html>
