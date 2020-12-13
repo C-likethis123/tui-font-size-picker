@@ -39,7 +39,7 @@ function initUI(editor) {
   fontSizeInput.addEventListener("change", event => {
     const fontSize = parseInt(event.target.value, 10)
 
-    if (isNaN(fontSize)) {
+    if (isNaN(fontSize) || fontSize <= 0) {
       return
     }
     editor.exec("changeFontSize", fontSize)
