@@ -29,10 +29,10 @@ function initUI(editor) {
       name: "fontSizePlugin",
       className: "tui-fontSize",
       // event: "showDropdown",
-      text: "F",
       tooltip: "Font Size",
       el: fontSizeInput,
-      style: "width: 40px; margin: 5px 3px;"
+      style:
+        "width: 40px; margin: 5px 3px; line-height: 12px; font-size: 11px; min-height: 14px;"
     }
   })
   fontSizeInput.setAttribute("type", "number")
