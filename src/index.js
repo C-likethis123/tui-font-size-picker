@@ -32,7 +32,7 @@ function initUI(editor) {
       text: "F",
       tooltip: "Font Size",
       el: fontSizeInput,
-      style: "width: 40px"
+      style: "width: 40px; margin: 5px 3px;"
     }
   })
   fontSizeInput.setAttribute("type", "number")
