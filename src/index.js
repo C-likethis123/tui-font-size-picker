@@ -17,21 +17,21 @@
  */
 function initUI(editor) {
   const toolbar = editor.getUI().getToolbar()
-
   const fontSizeInput = document.createElement("input")
 
-  fontSizeInput.setAttribute("type", "number")
   toolbar.insertItem(4, {
-    type: "fontSize",
+    type: "button",
     options: {
       name: "fontSizePlugin",
       className: "tui-fontSize",
-      event: "showDropdown",
+      // event: "showDropdown",
       text: "F",
       tooltip: "Font Size",
-      el: fontSizeInput
+      el: fontSizeInput,
+      style: "width: 40px"
     }
   })
+  fontSizeInput.setAttribute("type", "number")
 }
 
 /**
@@ -40,9 +40,9 @@ function initUI(editor) {
  */
 
 export default function fontSizePlugin(editor) {
-  editor.eventManager.addEventType("showDropdown")
-  editor.eventManager.listen("showDropdown", () =>
-    alert("You are editing the size!")
-  )
+  // editor.eventManager.addEventType("showDropdown")
+  // editor.eventManager.listen("showDropdown", () =>
+  //   alert("You are editing the size!")
+  // )
   initUI(editor)
 }
