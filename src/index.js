@@ -12,14 +12,6 @@
  */
 
 /**
- * Retrieves the value of the input element and triggers the necessary changes
- * @param {Event} event - onChange event triggered when the font size input changes
- */
-function handleFontSizeChange(event) {
-  console.log(event.target.value)
-}
-
-/**
  * Renders the UI of the editor
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
@@ -36,7 +28,7 @@ function initUI(editor) {
     options: {
       name: "fontSizePlugin",
       className: "tui-fontSize",
-      // event: "showDropdown",
+      event: "changeFontSize",
       tooltip: "Font Size",
       el: fontSizeInput,
       style:
@@ -44,7 +36,14 @@ function initUI(editor) {
     }
   })
   fontSizeInput.setAttribute("type", "number")
-  fontSizeInput.addEventListener("change", handleFontSizeChange)
+  fontSizeInput.addEventListener("change", event => {
+    const fontSize = parseInt(event.target.value, 10)
+
+    if (isNaN(fontSize)) {
+      return
+    }
+    editor.exec("changeFontSize", fontSize)
+  })
 }
 
 /**
@@ -57,5 +56,13 @@ export default function fontSizePlugin(editor) {
   // editor.eventManager.listen("showDropdown", () =>
   //   alert("You are editing the size!")
   // )
+  editor.addCommand("wysiwyg", {
+    name: "changeFontSize",
+    exec(wwe, fontSize) {
+      const sq = wwe.getEditor()
+
+      sq.setFontSize(`${fontSize}px`)
+    }
+  })
   initUI(editor)
 }
