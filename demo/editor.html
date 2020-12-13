@@ -20,13 +20,14 @@
   <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
 </body>
 <script class="code-js">
-  const { Editor } = toastui;
+  const { Editor, fontSizePlugin } = toastui;
   const editor = new Editor({
     el: document.querySelector('#editor'),
     previewStyle: 'vertical',
     height: '500px',
     initialEditType: 'wysiwyg',
     initialValue: 'Hello!',
+    plugins: [fontSizePlugin]
   });
 </script>
 </html>
