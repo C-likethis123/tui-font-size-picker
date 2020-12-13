@@ -19,7 +19,11 @@ function initUI(editor) {
   const toolbar = editor.getUI().getToolbar()
   const fontSizeInput = document.createElement("input")
 
-  toolbar.insertItem(4, {
+  toolbar.insertItem(-1, {
+    type: "divider"
+  })
+
+  toolbar.insertItem(-2, {
     type: "button",
     options: {
       name: "fontSizePlugin",
