@@ -12,6 +12,14 @@
  */
 
 /**
+ * Retrieves the value of the input element and triggers the necessary changes
+ * @param {Event} event - onChange event triggered when the font size input changes
+ */
+function handleFontSizeChange(event) {
+  console.log(event.target.value)
+}
+
+/**
  * Renders the UI of the editor
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
@@ -36,6 +44,7 @@ function initUI(editor) {
     }
   })
   fontSizeInput.setAttribute("type", "number")
+  fontSizeInput.addEventListener("change", handleFontSizeChange)
 }
 
 /**
