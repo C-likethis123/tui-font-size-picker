@@ -6,15 +6,15 @@
 /**
  * Renders the UI of the editor
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
- * @param {Object} options - options for plugin
  */
-function initUI(editor, options = {}) {
-  const toolbar = editor.getUI().getToolbar();
+function initUI(editor) {
+  const toolbar = editor.getUI().getToolbar()
+
   toolbar.insertItem(4, {
-    type: 'button',
+    type: "button",
     options: {
-      event: 'showDropdown',
-      text: 'Size'
+      event: "showDropdown",
+      text: "Size"
     }
   })
 }
@@ -24,8 +24,10 @@ function initUI(editor, options = {}) {
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
 
-export default function fontSizePlugin(editor, options = {}) {
-  editor.eventManager.addEventType('showDropdown');
-  editor.eventManager.listen('showDropdown', () => alert('You are editing the size!'))
-  initUI(editor, options)
+export default function fontSizePlugin(editor) {
+  editor.eventManager.addEventType("showDropdown")
+  editor.eventManager.listen("showDropdown", () =>
+    alert("You are editing the size!")
+  )
+  initUI(editor)
 }
