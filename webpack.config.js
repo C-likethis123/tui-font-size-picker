@@ -2,14 +2,14 @@
  * @fileoverview Configs for plugin's bundle file
  * @author Chow Jia Ying <chowjiaying211@gmail.com>
  */
-const path = require("path");
-const webpack = require("webpack");
-const { name, version, author, license } = require("./package.json");
+const path = require("path")
+const webpack = require("webpack")
+const { name, version, author, license } = require("./package.json")
 
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin")
 
 function getOutputConfig(isProduction, isCDN, minify) {
-  const filename = `toastui-${name.replace(/@toast-ui\//, "")}`;
+  const filename = `toastui-${name.replace(/@toast-ui\//, "")}`
 
   if (!isProduction || isCDN) {
     const config = {
@@ -18,13 +18,13 @@ function getOutputConfig(isProduction, isCDN, minify) {
       libraryTarget: "umd",
       path: path.resolve(__dirname, "dist/cdn"),
       filename: `${filename}${minify ? ".min" : ""}.js`
-    };
-
-    if (!isProduction) {
-      config.publicPath = "dist/cdn";
     }
 
-    return config;
+    if (!isProduction) {
+      config.publicPath = "dist/cdn"
+    }
+
+    return config
   }
 
   return {
@@ -32,11 +32,11 @@ function getOutputConfig(isProduction, isCDN, minify) {
     libraryTarget: "commonjs2",
     path: path.resolve(__dirname, "dist"),
     filename: `${filename}.js`
-  };
+  }
 }
 
 function getOptimizationConfig(isProduction, minify) {
-  const minimizer = [];
+  const minimizer = []
 
   if (isProduction && minify) {
     minimizer.push(
@@ -46,16 +46,16 @@ function getOptimizationConfig(isProduction, minify) {
         sourceMap: false,
         extractComments: false
       })
-    );
+    )
   }
 
-  return { minimizer };
+  return { minimizer }
 }
 
 module.exports = (env, argv) => {
-  const isProduction = argv.mode === "production";
-  const minify = !!argv.minify;
-  const isCDN = !!argv.cdn;
+  const isProduction = argv.mode === "production"
+  const minify = !!argv.minify
+  const isCDN = !!argv.cdn
   const config = {
     mode: isProduction ? "production" : "development",
     entry: "./src/index.js",
@@ -82,7 +82,7 @@ module.exports = (env, argv) => {
       ]
     },
     optimization: getOptimizationConfig(isProduction, minify)
-  };
+  }
 
   if (isProduction) {
     config.plugins = [
@@ -94,14 +94,14 @@ module.exports = (env, argv) => {
           `@license ${license}`
         ].join("\n")
       )
-    ];
+    ]
   } else {
     config.devServer = {
       inline: true,
       host: "0.0.0.0"
-    };
-    config.devtool = "inline-source-map";
+    }
+    config.devtool = "inline-source-map"
   }
 
-  return config;
-};
+  return config
+}
