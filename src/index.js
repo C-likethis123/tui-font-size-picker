@@ -1,6 +1,14 @@
 /**
  * @fileoverview Code for the font size plugin
  * @author Chow Jia Ying <chowjiaying211@gmail.com>
+ *
+ * This is a plugin to adjust the font size of a block of text.
+ * The plugin introduces an input element for users to enter their desired font size.
+ * When the user enters a numeric value, it should change the font size of the highlighted text.
+ *
+ * Additionally, there can be a dropdown list/menu list for users to click onto. When clicked, a list of common font sizes will be displayed (will be taken from Microsoft word).
+ *
+ * There should be validation, where only numbers are allowed values.
  */
 
 /**
@@ -10,17 +18,24 @@
 function initUI(editor) {
   const toolbar = editor.getUI().getToolbar()
 
+  const fontSizeInput = document.createElement("input")
+
+  fontSizeInput.setAttribute("type", "number")
   toolbar.insertItem(4, {
-    type: "button",
+    type: "fontSize",
     options: {
+      name: "fontSizePlugin",
+      className: "tui-fontSize",
       event: "showDropdown",
-      text: "Size"
+      text: "F",
+      tooltip: "Font Size",
+      el: fontSizeInput
     }
   })
 }
 
 /**
- * Color syntax plugin
+ * Font size plugin
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
 
