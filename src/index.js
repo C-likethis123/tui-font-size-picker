@@ -36,6 +36,7 @@ function initUI(editor) {
     }
   })
   fontSizeInput.setAttribute("type", "number")
+  fontSizeInput.setAttribute("value", "12")
   fontSizeInput.addEventListener("change", event => {
     const fontSize = parseInt(event.target.value, 10)
 
