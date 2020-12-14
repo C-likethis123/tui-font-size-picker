@@ -54,7 +54,8 @@ module.exports = {
     "prettier/prettier": [
       "error",
       {
-        semi: false
+        semi: false,
+        arrowParens: "always"
       }
     ]
   }
