@@ -37,7 +37,7 @@ function initUI(editor) {
   })
   fontSizeInput.setAttribute("type", "number")
   fontSizeInput.setAttribute("value", "12")
-  fontSizeInput.addEventListener("change", event => {
+  fontSizeInput.addEventListener("change", (event) => {
     const fontSize = parseInt(event.target.value, 10)
 
     if (isNaN(fontSize) || fontSize <= 0) {
@@ -53,10 +53,6 @@ function initUI(editor) {
  */
 
 export default function fontSizePlugin(editor) {
-  // editor.eventManager.addEventType("showDropdown")
-  // editor.eventManager.listen("showDropdown", () =>
-  //   alert("You are editing the size!")
-  // )
   editor.addCommand("wysiwyg", {
     name: "changeFontSize",
     exec(wwe, fontSize) {
