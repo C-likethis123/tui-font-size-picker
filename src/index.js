@@ -29,7 +29,7 @@ function initDropdown(editor) {
   fontSizeValues.forEach((fontSize) => {
     const option = document.createElement("li")
 
-    option.setAttribute("style", "list-style: none;")
+    option.classList.add("font-dropdown-option")
 
     option.textContent = fontSize
     option.value = fontSize

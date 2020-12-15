@@ -8,3 +8,16 @@
   width: auto !important;
   position: absolute;
 }
+
+div.fontDropdownContainer > div.tui-popup-body {
+  padding: unset;
+}
+
+li.font-dropdown-option {
+  padding: 2.5px 17px;
+  list-style: none;
+}
+
+li.font-dropdown-option:hover {
+  background-color: #eee;
+}
