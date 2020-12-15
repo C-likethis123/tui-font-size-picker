@@ -1,4 +1,5 @@
 import "./index.css"
+import { setAttributes } from "./helpers.js"
 /**
  * @fileoverview Code for the font size plugin
  * @author Chow Jia Ying <chowjiaying211@gmail.com>
@@ -133,8 +134,10 @@ function initFontSizeInput(editor) {
       el: fontSizeInput,
     },
   })
-  fontSizeInput.setAttribute("type", "number")
-  fontSizeInput.setAttribute("value", "12")
+  setAttributes(fontSizeInput, {
+    type: "number",
+    value: "12",
+  })
   fontSizeInput.addEventListener("change", (event) => {
     const fontSize = parseInt(event.target.value, 10)
 
