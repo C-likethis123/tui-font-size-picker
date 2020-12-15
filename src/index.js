@@ -12,12 +12,63 @@
  */
 
 /**
+ * Renders the font dropdown options
+ * @param {Editor|Viewer} editor - instance of Editor or Viewer
+ * Renders a dropdown of font sizes. On click, it updates the font size and closes the dropdown.
+ * It also has an input field. When updated, it also updates the font size.
+ * Create a dropdown using select and option elements. The value will be used to update the input. When the input is updated, it also changes the dropdown elements. If the dropdown does not have that input, it does not select any of the dropdowns.
+ */
+function initDropdown(editor) {
+  const dropdownContainer = document.createElement("div")
+  const dropdown = document.createElement("ul")
+
+  dropdown.setAttribute(
+    "style",
+    "padding-inline-start: 0px; margin-block-start: 0px; margin-block-end:0px;"
+  )
+  const fontSizeValues = [12, 14, 16, 18, 20, 24]
+
+  fontSizeValues.forEach((fontSize) => {
+    const option = document.createElement("li")
+
+    option.setAttribute("style", "list-style: none;")
+
+    option.textContent = fontSize
+    option.value = fontSize
+    option.addEventListener("click", (event) => {
+      const fontSizeValue = event.target.value
+
+      editor.exec("changeFontSize", fontSizeValue)
+    })
+    dropdown.appendChild(option)
+  })
+  dropdownContainer.appendChild(dropdown)
+  const popup = editor.getUI().createPopup({
+    header: false,
+    title: null,
+    content: dropdownContainer,
+    className: "fontDropdownContainer",
+    target: editor.getUI().getToolbar().el,
+    css: {
+      width: "auto",
+      position: "absolute",
+      right: "840px"
+    }
+  })
+
+  editor.eventManager.listen("showDropdown", () => {
+    popup.show()
+  })
+}
+/**
  * Renders the UI of the editor
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
 function initUI(editor) {
   const toolbar = editor.getUI().getToolbar()
   const fontSizeInput = document.createElement("input")
+
+  editor.eventManager.addEventType("showDropdown")
 
   toolbar.insertItem(-1, {
     type: "divider"
@@ -28,7 +79,7 @@ function initUI(editor) {
     options: {
       name: "fontSizePlugin",
       className: "tui-fontSize",
-      event: "changeFontSize",
+      event: "showDropdown",
       tooltip: "Font Size",
       el: fontSizeInput,
       style:
@@ -45,6 +96,7 @@ function initUI(editor) {
     }
     editor.exec("changeFontSize", fontSize)
   })
+  initDropdown(editor)
 }
 
 /**
