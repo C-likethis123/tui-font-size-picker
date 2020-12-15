@@ -1,6 +1,7 @@
 module.exports = {
   plugins: ["prettier"],
   extends: ["tui/es6", "plugin:prettier/recommended", "prettier"],
+  parser: "babel-eslint",
   parserOptions: {
     sourceType: "module",
   },
