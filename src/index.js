@@ -35,7 +35,11 @@ function initDropdown(editor) {
     option.value = fontSize
     option.addEventListener("click", (event) => {
       const fontSizeValue = event.target.value
+      const toolbar = editor.getUI().getToolbar()
+      const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
+      const { el } = toolbar.getItem(inputButtonIndex)
 
+      el.value = fontSizeValue
       editor.exec("changeFontSize", fontSizeValue)
       editor.eventManager.emit("hideDropdown")
     })
@@ -66,7 +70,7 @@ function initDropdown(editor) {
     )
     popup.show()
   })
-  editor.eventManager.addEventType("hideDropdown")
+
   editor.eventManager.listen("hideDropdown", () => {
     popup.hide()
   })
