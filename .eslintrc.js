@@ -27,6 +27,7 @@ module.exports = {
     "no-useless-rename": "error",
     "no-duplicate-imports": ["error", { includeExports: true }],
     "dot-notation": ["error", { allowKeywords: true }],
+    "guard-for-in": "off",
     "prefer-destructuring": [
       "error",
       {
