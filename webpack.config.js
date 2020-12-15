@@ -17,7 +17,7 @@ function getOutputConfig(isProduction, isCDN, minify) {
       libraryExport: "default",
       libraryTarget: "umd",
       path: path.resolve(__dirname, "dist/cdn"),
-      filename: `${filename}${minify ? ".min" : ""}.js`
+      filename: `${filename}${minify ? ".min" : ""}.js`,
     }
 
     if (!isProduction) {
@@ -31,7 +31,7 @@ function getOutputConfig(isProduction, isCDN, minify) {
     libraryExport: "default",
     libraryTarget: "commonjs2",
     path: path.resolve(__dirname, "dist"),
-    filename: `${filename}.js`
+    filename: `${filename}.js`,
   }
 }
 
@@ -44,8 +44,8 @@ function getOptimizationConfig(isProduction, minify) {
         cache: true,
         parallel: true,
         sourceMap: false,
-        extractComments: false
-      })
+        extractComments: false,
+      }),
     )
   }
 
@@ -68,8 +68,8 @@ module.exports = (env, argv) => {
           loader: "eslint-loader",
           enforce: "pre",
           options: {
-            failOnError: isProduction
-          }
+            failOnError: isProduction,
+          },
         },
         {
           test: /\.js$/,
@@ -77,11 +77,15 @@ module.exports = (env, argv) => {
           loader: "babel-loader?cacheDirectory",
           options: {
             // rootMode: "upward"
-          }
-        }
-      ]
+          },
+        },
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
+      ],
     },
-    optimization: getOptimizationConfig(isProduction, minify)
+    optimization: getOptimizationConfig(isProduction, minify),
   }
 
   if (isProduction) {
@@ -91,14 +95,14 @@ module.exports = (env, argv) => {
           "TOAST UI Editor : Font Size Plugin",
           `@version ${version} | ${new Date().toDateString()}`,
           `@author ${author}`,
-          `@license ${license}`
-        ].join("\n")
-      )
+          `@license ${license}`,
+        ].join("\n"),
+      ),
     ]
   } else {
     config.devServer = {
       inline: true,
-      host: "0.0.0.0"
+      host: "0.0.0.0",
     }
     config.devtool = "inline-source-map"
   }
