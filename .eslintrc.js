@@ -21,7 +21,7 @@ module.exports = {
         blankLine: "any",
         prev: ["const", "let", "var"],
         next: ["const", "let", "var"],
-      }
+      },
     ],
     "no-useless-rename": "error",
     "no-duplicate-imports": ["error", { includeExports: true }],
@@ -36,11 +36,11 @@ module.exports = {
         AssignmentExpression: {
           array: false,
           object: false,
-        }
+        },
       },
       {
         enforceForRenamedProperties: false,
-      }
+      },
     ],
     "arrow-body-style": [
       "error",
