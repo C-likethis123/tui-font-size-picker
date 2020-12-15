@@ -37,6 +37,7 @@ function initDropdown(editor) {
       const fontSizeValue = event.target.value
 
       editor.exec("changeFontSize", fontSizeValue)
+      editor.eventManager.emit("hideDropdown")
     })
     dropdown.appendChild(option)
   })
@@ -50,6 +51,10 @@ function initDropdown(editor) {
   })
 
   editor.eventManager.listen("showDropdown", () => {
+    if (popup.isShow()) {
+      popup.hide()
+      return
+    }
     const toolbar = editor.getUI().getToolbar()
     const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
     const { el } = toolbar.getItem(inputButtonIndex)
@@ -60,6 +65,10 @@ function initDropdown(editor) {
       `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
     )
     popup.show()
+  })
+  editor.eventManager.addEventType("hideDropdown")
+  editor.eventManager.listen("hideDropdown", () => {
+    popup.hide()
   })
 }
 /**
