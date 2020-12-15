@@ -29,3 +29,8 @@ li.font-dropdown-option:hover {
   font-size: 11px;
   min-height: 14px;
 }
+
+.highlighted {
+  background-color: #ACCEF7;
+  width: 'fit-content';
+}

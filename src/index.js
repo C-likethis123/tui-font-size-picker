@@ -13,6 +13,28 @@ import "./index.css"
  */
 
 /**
+ * Apply CSS styling to text to give the impression of the text being selected
+ * @param {Editor} editor - instance of Editor
+ * @param {boolean} toHighlight - indicates if the highlight style is to be added or removed
+ */
+function applyHighlightStyle(editor, toHighlight) {
+  const sq = editor.getSquire()
+  const range = sq.getSelection()
+  const highlightStyle = {
+    tag: "SPAN",
+    attributes: {
+      class: "highlighted",
+    },
+  }
+
+  if (toHighlight) {
+    sq.changeFormat(highlightStyle, null, range)
+  } else {
+    sq.changeFormat(null, highlightStyle, range)
+  }
+}
+
+/**
  * Renders the font dropdown options
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  * Renders a dropdown of font sizes. On click, it updates the font size and closes the dropdown.
@@ -89,6 +111,7 @@ function initDropdown(editor) {
       `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
     )
     popup.show()
+    applyHighlightStyle(editor, true)
   })
 
   editor.eventManager.listen("hideDropdown", () => {
@@ -150,6 +173,7 @@ export default function fontSizePlugin(editor) {
       const sq = wwe.getEditor()
 
       sq.setFontSize(`${fontSize}px`)
+      applyHighlightStyle(editor, false)
     },
   })
   initUI(editor)
