@@ -146,6 +146,7 @@ function initFontSizeInput(editor) {
       return
     }
     editor.exec("changeFontSize", fontSize)
+    editor.eventManager.emit("hideDropdown")
   })
 }
 
