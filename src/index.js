@@ -1,3 +1,4 @@
+import "./index.css"
 /**
  * @fileoverview Code for the font size plugin
  * @author Chow Jia Ying <chowjiaying211@gmail.com>
