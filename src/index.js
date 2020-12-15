@@ -3,13 +3,8 @@ import "./index.css"
  * @fileoverview Code for the font size plugin
  * @author Chow Jia Ying <chowjiaying211@gmail.com>
  *
- * This is a plugin to adjust the font size of a block of text.
- * The plugin introduces an input element for users to enter their desired font size.
- * When the user enters a numeric value, it should change the font size of the highlighted text.
+ * This is a plugin to adjust the font size of a block of text in both the Markdown and WYSIWYG versions.
  *
- * Additionally, there can be a dropdown list/menu list for users to click onto. When clicked, a list of common font sizes will be displayed (will be taken from Microsoft word).
- *
- * There should be validation, where only numbers are allowed values.
  */
 
 /**
@@ -35,11 +30,8 @@ function applyHighlightStyle(editor, toHighlight) {
 }
 
 /**
- * Renders the font dropdown options
- * @param {Editor|Viewer} editor - instance of Editor or Viewer
- * Renders a dropdown of font sizes. On click, it updates the font size and closes the dropdown.
- * It also has an input field. When updated, it also updates the font size.
- * Create a dropdown using select and option elements. The value will be used to update the input. When the input is updated, it also changes the dropdown elements. If the dropdown does not have that input, it does not select any of the dropdowns.
+ * Renders a list of font sizes for users to choose from
+ * @param {Editor} editor - instance of Editor or Viewer
  */
 function initDropdown(editor) {
   const dropdownContainer = document.createElement("div")
@@ -119,6 +111,10 @@ function initDropdown(editor) {
   })
 }
 
+/**
+ * Renders an input for users to change font sizes
+ * @param {Editor} editor
+ */
 function initFontSizeInput(editor) {
   const toolbar = editor.getUI().getToolbar()
   const fontSizeInput = document.createElement("input")
