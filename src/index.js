@@ -22,10 +22,7 @@ function initDropdown(editor) {
   const dropdownContainer = document.createElement("div")
   const dropdown = document.createElement("ul")
 
-  dropdown.setAttribute(
-    "style",
-    "padding-inline-start: 0px; margin-block-start: 0px; margin-block-end:0px;"
-  )
+  dropdown.classList.add("font-dropdown")
   const fontSizeValues = [12, 14, 16, 18, 20, 24]
 
   fontSizeValues.forEach((fontSize) => {
@@ -52,8 +49,8 @@ function initDropdown(editor) {
     css: {
       width: "auto",
       position: "absolute",
-      right: "840px"
-    }
+      right: "840px",
+    },
   })
 
   editor.eventManager.listen("showDropdown", () => {
@@ -71,7 +68,7 @@ function initUI(editor) {
   editor.eventManager.addEventType("showDropdown")
 
   toolbar.insertItem(-1, {
-    type: "divider"
+    type: "divider",
   })
 
   toolbar.insertItem(-2, {
@@ -83,8 +80,8 @@ function initUI(editor) {
       tooltip: "Font Size",
       el: fontSizeInput,
       style:
-        "width: 40px; margin: 5px 3px; line-height: 12px; font-size: 11px; min-height: 14px;"
-    }
+        "width: 40px; margin: 5px 3px; line-height: 12px; font-size: 11px; min-height: 14px;",
+    },
   })
   fontSizeInput.setAttribute("type", "number")
   fontSizeInput.setAttribute("value", "12")
@@ -111,7 +108,7 @@ export default function fontSizePlugin(editor) {
       const sq = wwe.getEditor()
 
       sq.setFontSize(`${fontSize}px`)
-    }
+    },
   })
   initUI(editor)
 }
