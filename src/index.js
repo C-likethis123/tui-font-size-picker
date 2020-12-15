@@ -71,11 +71,8 @@ function initDropdown(editor) {
     popup.hide()
   })
 }
-/**
- * Renders the UI of the editor
- * @param {Editor|Viewer} editor - instance of Editor or Viewer
- */
-function initUI(editor) {
+
+function initFontSizeInput(editor) {
   const toolbar = editor.getUI().getToolbar()
   const fontSizeInput = document.createElement("input")
 
@@ -107,6 +104,17 @@ function initUI(editor) {
     }
     editor.exec("changeFontSize", fontSize)
   })
+}
+
+/**
+ * Renders the UI of the editor
+ * @param {Editor|Viewer} editor - instance of Editor or Viewer
+ */
+function initUI(editor) {
+  editor.eventManager.addEventType("showDropdown")
+  editor.eventManager.addEventType("hideDropdown")
+
+  initFontSizeInput(editor)
   initDropdown(editor)
 }
 
