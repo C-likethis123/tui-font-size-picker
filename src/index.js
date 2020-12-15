@@ -47,14 +47,18 @@ function initDropdown(editor) {
     content: dropdownContainer,
     className: "fontDropdownContainer",
     target: editor.getUI().getToolbar().el,
-    css: {
-      width: "auto",
-      position: "absolute",
-      right: "840px",
-    },
   })
 
   editor.eventManager.listen("showDropdown", () => {
+    const toolbar = editor.getUI().getToolbar()
+    const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
+    const { el } = toolbar.getItem(inputButtonIndex)
+    const { offsetLeft, offsetTop, offsetHeight } = el
+
+    popup.el.setAttribute(
+      "style",
+      `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
+    )
     popup.show()
   })
 }

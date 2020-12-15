@@ -3,3 +3,8 @@
   margin-block-start: 0px;
   margin-block-end: 0px;
 }
+
+.fontDropdownContainer {
+  width: auto !important;
+  position: absolute;
+}
