@@ -2,14 +2,14 @@ module.exports = {
   plugins: ["prettier"],
   extends: ["tui/es6", "plugin:prettier/recommended", "prettier"],
   parserOptions: {
-    sourceType: "module"
+    sourceType: "module",
   },
   env: {
     commonjs: true,
-    jasmine: true
+    jasmine: true,
   },
   globals: {
-    fixture: true
+    fixture: true,
   },
   rules: {
     "lines-around-directive": 0,
@@ -20,7 +20,7 @@ module.exports = {
       {
         blankLine: "any",
         prev: ["const", "let", "var"],
-        next: ["const", "let", "var"]
+        next: ["const", "let", "var"],
       }
     ],
     "no-useless-rename": "error",
@@ -31,32 +31,33 @@ module.exports = {
       {
         VariableDeclarator: {
           array: true,
-          object: true
+          object: true,
         },
         AssignmentExpression: {
           array: false,
-          object: false
+          object: false,
         }
       },
       {
-        enforceForRenamedProperties: false
+        enforceForRenamedProperties: false,
       }
     ],
     "arrow-body-style": [
       "error",
       "as-needed",
-      { requireReturnForObjectLiteral: true }
+      { requireReturnForObjectLiteral: true },
     ],
     "object-property-newline": [
       "error",
-      { allowMultiplePropertiesPerLine: true }
+      { allowMultiplePropertiesPerLine: true },
     ],
     "prettier/prettier": [
       "error",
       {
         semi: false,
-        arrowParens: "always"
-      }
-    ]
-  }
+        arrowParens: "always",
+        trailingComma: "all",
+      },
+    ],
+  },
 }
