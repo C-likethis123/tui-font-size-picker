@@ -76,8 +76,7 @@ function initFontSizeInput(editor) {
   const toolbar = editor.getUI().getToolbar()
   const fontSizeInput = document.createElement("input")
 
-  editor.eventManager.addEventType("showDropdown")
-
+  fontSizeInput.classList.add("tui-font-size")
   toolbar.insertItem(-1, {
     type: "divider",
   })
@@ -86,12 +85,9 @@ function initFontSizeInput(editor) {
     type: "button",
     options: {
       name: "fontSizePlugin",
-      className: "tui-fontSize",
       event: "showDropdown",
       tooltip: "Font Size",
       el: fontSizeInput,
-      style:
-        "width: 40px; margin: 5px 3px; line-height: 12px; font-size: 11px; min-height: 14px;",
     },
   })
   fontSizeInput.setAttribute("type", "number")
