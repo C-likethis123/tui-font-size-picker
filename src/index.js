@@ -179,8 +179,25 @@ export default function fontSizePlugin(editor) {
     // sets font size and applies highlighting style
     exec(wwe, fontSize) {
       const sq = wwe.getEditor()
+      const tableSelectionManager = wwe.componentManager.getManager(
+        "tableSelection",
+      )
 
-      sq.setFontSize(`${fontSize}px`)
+      if (
+        sq.hasFormat("table") &&
+        tableSelectionManager.getSelectedCells().length
+      ) {
+        tableSelectionManager.styleToSelectedCells((squire, fontSizeValue) => {
+          squire.setFontSize(`${fontSizeValue}px`)
+        }, fontSize)
+
+        const range = sq.getSelection()
+
+        range.collapse(true)
+        sq.setSelection(range)
+      } else {
+        sq.setFontSize(`${fontSize}px`)
+      }
       fontSizeInput.value = fontSize
       applyHighlightStyle(editor, false)
       editor.eventManager.emit("hideDropdown")
