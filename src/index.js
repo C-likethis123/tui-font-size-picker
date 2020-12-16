@@ -165,6 +165,21 @@ function initUI(editor) {
 }
 
 /**
+ * Apply <span> tags around text to style text in Markdown mode
+ * @param {string} text - text to add HTML tags to
+ */
+function applyFontSizeHTMLTag(text, fontSize) {
+  const pre = `<span class="size" style="font-size: ${fontSize}px">`
+  const post = `</span>`
+
+  return {
+    result: `${pre}${text}${post}`,
+    from: pre.length,
+    to: pre.length + text.length,
+  }
+}
+
+/**
  * Font size plugin
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
@@ -174,6 +189,31 @@ export default function fontSizePlugin(editor) {
 
   initUIEvents(editor, fontSizeInput, dropdown)
   // add commands for editor
+
+  editor.addCommand("markdown", {
+    name: "changeFontSize",
+    exec(md, fontSize) {
+      // replace selected text
+      const cm = md.getEditor()
+      const rangeFrom = md.getCursor("from")
+      const rangeTo = md.getCursor("to")
+      const selectedText = cm.getSelection()
+      const { result, from, to } = applyFontSizeHTMLTag(selectedText, fontSize)
+
+      cm.replaceSelection(result)
+
+      // move cursor
+      const newStart = { line: rangeFrom.line, ch: rangeFrom.ch + from }
+      const newEnd = {
+        line: rangeTo.line,
+        ch: rangeFrom.line === rangeTo.line ? rangeTo.ch + from : to,
+      }
+
+      cm.setSelection(newStart, newEnd)
+      md.focus()
+    },
+  })
+
   editor.addCommand("wysiwyg", {
     name: "changeFontSize",
     // sets font size and applies highlighting style
