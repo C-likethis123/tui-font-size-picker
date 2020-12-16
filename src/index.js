@@ -70,7 +70,6 @@ function initDropdown(editor) {
     // program what happens when option is clicked
     option.addEventListener("click", () => {
       editor.exec("changeFontSize", fontSize) // emit change font size event
-      editor.eventManager.emit("hideDropdown") // hide dropdown when done
     })
     dropdown.appendChild(option)
   })
@@ -140,7 +139,6 @@ function initFontSizeInput(editor) {
       return
     }
     editor.exec("changeFontSize", fontSize)
-    editor.eventManager.emit("hideDropdown")
   })
 }
 
@@ -174,7 +172,9 @@ export default function fontSizePlugin(editor) {
       const sq = wwe.getEditor()
 
       sq.setFontSize(`${fontSize}px`)
+      fontSizeInput.value = fontSize
       applyHighlightStyle(editor, false)
+      editor.eventManager.emit("hideDropdown")
     },
   })
 }
