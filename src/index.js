@@ -65,18 +65,12 @@ function initDropdown(editor) {
     const option = document.createElement("li")
 
     option.classList.add("font-dropdown-option")
-
     option.textContent = fontSize
     option.value = fontSize
-    option.addEventListener("click", (event) => {
-      const fontSizeValue = event.target.value
-      const toolbar = editor.getUI().getToolbar()
-      const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
-      const { el } = toolbar.getItem(inputButtonIndex)
-
-      el.value = fontSizeValue
-      editor.exec("changeFontSize", fontSizeValue)
-      editor.eventManager.emit("hideDropdown")
+    // program what happens when option is clicked
+    option.addEventListener("click", () => {
+      editor.exec("changeFontSize", fontSize) // emit change font size event
+      editor.eventManager.emit("hideDropdown") // hide dropdown when done
     })
     dropdown.appendChild(option)
   })
@@ -89,27 +83,28 @@ function initDropdown(editor) {
     target: editor.getUI().getToolbar().el,
   })
 
-  editor.eventManager.listen("showDropdown", () => {
-    if (popup.isShow()) {
-      popup.hide()
-      return
-    }
-    const toolbar = editor.getUI().getToolbar()
-    const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
-    const { el } = toolbar.getItem(inputButtonIndex)
-    const { offsetLeft, offsetTop, offsetHeight } = el
+  return popup
+  // editor.eventManager.listen("showDropdown", () => {
+  //   if (popup.isShow()) {
+  //     popup.hide()
+  //     return
+  //   }
+  //   const toolbar = editor.getUI().getToolbar()
+  //   const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
+  //   const { el } = toolbar.getItem(inputButtonIndex)
+  //   const { offsetLeft, offsetTop, offsetHeight } = el
 
-    popup.el.setAttribute(
-      "style",
-      `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
-    )
-    popup.show()
-    applyHighlightStyle(editor, true)
-  })
+  //   popup.el.setAttribute(
+  //     "style",
+  //     `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
+  //   )
+  //   popup.show()
+  //   applyHighlightStyle(editor, true)
+  // })
 
-  editor.eventManager.listen("hideDropdown", () => {
-    popup.hide()
-  })
+  // editor.eventManager.listen("hideDropdown", () => {
+  //   popup.hide()
+  // })
 }
 
 /**
@@ -157,8 +152,10 @@ function initUI(editor) {
   editor.eventManager.addEventType("showDropdown")
   editor.eventManager.addEventType("hideDropdown")
 
-  initFontSizeInput(editor)
-  initDropdown(editor)
+  return {
+    fontSizeInput: initFontSizeInput(editor),
+    dropdown: initDropdown(editor),
+  }
 }
 
 /**
@@ -167,8 +164,12 @@ function initUI(editor) {
  */
 
 export default function fontSizePlugin(editor) {
+  const { fontSizeInput, dropdown } = initUI(editor)
+
+  // add commands for editor
   editor.addCommand("wysiwyg", {
     name: "changeFontSize",
+    // sets font size and applies highlighting style
     exec(wwe, fontSize) {
       const sq = wwe.getEditor()
 
@@ -176,5 +177,4 @@ export default function fontSizePlugin(editor) {
       applyHighlightStyle(editor, false)
     },
   })
-  initUI(editor)
 }
