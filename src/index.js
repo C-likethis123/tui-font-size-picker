@@ -83,27 +83,6 @@ function initDropdown(editor) {
   })
 
   return popup
-  // editor.eventManager.listen("showDropdown", () => {
-  //   if (popup.isShow()) {
-  //     popup.hide()
-  //     return
-  //   }
-  //   const toolbar = editor.getUI().getToolbar()
-  //   const inputButtonIndex = toolbar.indexOfItem("fontSizePlugin")
-  //   const { el } = toolbar.getItem(inputButtonIndex)
-  //   const { offsetLeft, offsetTop, offsetHeight } = el
-
-  //   popup.el.setAttribute(
-  //     "style",
-  //     `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
-  //   )
-  //   popup.show()
-  //   applyHighlightStyle(editor, true)
-  // })
-
-  // editor.eventManager.listen("hideDropdown", () => {
-  //   popup.hide()
-  // })
 }
 
 /**
@@ -132,6 +111,16 @@ function initFontSizeInput(editor) {
     type: "number",
     value: "12",
   })
+  return fontSizeInput
+}
+
+/**
+ * Initialise UI rendering logic
+ * @param {Editor} editor - instance of editor
+ * @param {HTMLInputElement} fontSizeInput - HTMLInputElement to enter font sizes
+ * @param {HTMLDivElement} dropdown - dropdown of font sizes
+ */
+function initUIEvents(editor, fontSizeInput, dropdown) {
   fontSizeInput.addEventListener("change", (event) => {
     const fontSize = parseInt(event.target.value, 10)
 
@@ -140,6 +129,28 @@ function initFontSizeInput(editor) {
     }
     editor.exec("changeFontSize", fontSize)
   })
+
+  editor.eventManager.addEventType("showDropdown")
+  editor.eventManager.addEventType("hideDropdown")
+  editor.eventManager.listen("showDropdown", () => {
+    if (dropdown.isShow()) {
+      dropdown.hide()
+      return
+    }
+
+    const { offsetLeft, offsetTop, offsetHeight } = fontSizeInput
+
+    dropdown.el.setAttribute(
+      "style",
+      `top: ${offsetTop + offsetHeight}px; left: ${offsetLeft}px`,
+    )
+    dropdown.show()
+    applyHighlightStyle(editor, true)
+  })
+
+  editor.eventManager.listen("hideDropdown", () => {
+    dropdown.hide()
+  })
 }
 
 /**
@@ -147,9 +158,6 @@ function initFontSizeInput(editor) {
  * @param {Editor|Viewer} editor - instance of Editor or Viewer
  */
 function initUI(editor) {
-  editor.eventManager.addEventType("showDropdown")
-  editor.eventManager.addEventType("hideDropdown")
-
   return {
     fontSizeInput: initFontSizeInput(editor),
     dropdown: initDropdown(editor),
@@ -164,6 +172,7 @@ function initUI(editor) {
 export default function fontSizePlugin(editor) {
   const { fontSizeInput, dropdown } = initUI(editor)
 
+  initUIEvents(editor, fontSizeInput, dropdown)
   // add commands for editor
   editor.addCommand("wysiwyg", {
     name: "changeFontSize",
