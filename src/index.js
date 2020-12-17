@@ -175,7 +175,7 @@ function applyFontSizeHTMLTag(text, fontSize) {
   return {
     result: `${pre}${text}${post}`,
     from: pre.length,
-    to: pre.length + text.length,
+    to: pre.length + text.length + post.length,
   }
 }
 
@@ -188,8 +188,8 @@ export default function fontSizePlugin(editor) {
   const { fontSizeInput, dropdown } = initUI(editor)
 
   initUIEvents(editor, fontSizeInput, dropdown)
-  // add commands for editor
 
+  // add commands for editor
   editor.addCommand("markdown", {
     name: "changeFontSize",
     exec(md, fontSize) {
@@ -198,15 +198,15 @@ export default function fontSizePlugin(editor) {
       const rangeFrom = md.getCursor("from")
       const rangeTo = md.getCursor("to")
       const selectedText = cm.getSelection()
-      const { result, from, to } = applyFontSizeHTMLTag(selectedText, fontSize)
+      const { result, to } = applyFontSizeHTMLTag(selectedText, fontSize)
 
       cm.replaceSelection(result)
 
       // move cursor
-      const newStart = { line: rangeFrom.line, ch: rangeFrom.ch + from }
+      const newStart = { line: rangeFrom.line, ch: rangeFrom.ch }
       const newEnd = {
         line: rangeTo.line,
-        ch: rangeFrom.line === rangeTo.line ? rangeTo.ch + from : to,
+        ch: rangeFrom.line === rangeTo.line ? rangeTo.ch + to : to,
       }
 
       cm.setSelection(newStart, newEnd)
