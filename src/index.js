@@ -8,6 +8,8 @@ import { setAttributes } from "./helpers.js"
  *
  */
 
+const fontStyleRegex = /style="font-size: \d+px"/g
+
 /**
  * Apply CSS styling to text to give the impression of the text being selected
  * @param {Editor} editor - instance of Editor
@@ -169,13 +171,24 @@ function initUI(editor) {
  * @param {string} text - text to add HTML tags to
  */
 function applyFontSizeHTMLTag(text, fontSize) {
-  const pre = `<span class="size" style="font-size: ${fontSize}px">`
-  const post = `</span>`
+  const fontStyleApplied = text.match(fontStyleRegex)
+
+  if (fontStyleApplied) {
+    const result = text.replace(
+      fontStyleRegex,
+      `style="font-size: ${fontSize}px"`,
+    )
+
+    return {
+      result,
+      to: result.length,
+    }
+  }
+  const result = `<span class="size" style="font-size: ${fontSize}px">${text}</span>`
 
   return {
-    result: `${pre}${text}${post}`,
-    from: pre.length,
-    to: pre.length + text.length + post.length,
+    result,
+    to: result.length,
   }
 }
 
