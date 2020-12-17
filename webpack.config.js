@@ -13,7 +13,7 @@ function getOutputConfig(isProduction, isCDN, minify) {
 
   if (!isProduction || isCDN) {
     const config = {
-      library: ["toastui", "fontSizePlugin"],
+      library: ["toastui", "Editor", "plugin", "fontSizePlugin"],
       libraryExport: "default",
       libraryTarget: "umd",
       path: path.resolve(__dirname, "dist/cdn"),

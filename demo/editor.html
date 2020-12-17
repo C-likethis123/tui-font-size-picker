@@ -13,21 +13,23 @@
     <h1 style="font-family: Arial, Helvetica, sans-serif;">Demo - Font Size Plugin</h1>
     <div id="editor"></div>
   </div>
-  <!-- Plugin -->
-  <script src="../dist/cdn/toastui-editor-plugin-font-size.js"></script>
   <!-- Editor -->
   <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
   <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
-</body>
+  <link rel="stylesheet" href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css"/>
+  <script src="https://uicdn.toast.com/editor-plugin-color-syntax/latest/toastui-editor-plugin-color-syntax.min.js"></script>
+  <!-- Plugin -->
+  <script src="../dist/cdn/toastui-editor-plugin-font-size.js"></script>
 <script class="code-js">
-  const { Editor, fontSizePlugin } = toastui;
+  const { Editor } = toastui;
+  const {colorSyntax, fontSizePlugin} = Editor.plugin
   const editor = new Editor({
     el: document.querySelector('#editor'),
     previewStyle: 'vertical',
     height: '500px',
-    initialEditType: 'wysiwyg',
+    initialEditType: 'markdown',
     initialValue: 'Hello!',
-    plugins: [fontSizePlugin]
+    plugins: [colorSyntax, fontSizePlugin]
   });
 </script>
 </html>
