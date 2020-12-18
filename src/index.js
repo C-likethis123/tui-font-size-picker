@@ -223,6 +223,7 @@ export default function fontSizePlugin(editor) {
       }
 
       cm.setSelection(newStart, newEnd)
+      editor.eventManager.emit("hideDropdown")
       md.focus()
     },
   })
