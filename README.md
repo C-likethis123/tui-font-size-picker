@@ -28,6 +28,8 @@ TBD
 
 Clone this repository: `git clone https://github.com/C-likethis123/nhn-font-size-plugin`
 
+Install dependencies: `yarn install`
+
 To run: `yarn serve` or `npm serve`
 
 Navigate to `localhost:8080/demo/editor.html` to load the demo.
