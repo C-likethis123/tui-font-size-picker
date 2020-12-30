@@ -20,17 +20,17 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/C-likethis123/nhn-font-size-plugin.git"
+    "url": "https://github.com/C-likethis123/tui-font-size-picker.git"
   },
   "bugs": {
-    "url": "https://github.com/C-likethis123/nhn-font-size-plugin/issues"
+    "url": "https://github.com/C-likethis123/tui-font-size-picker/issues"
   },
   "browserslist": "last 2 versions, not ie <= 10",
   "scripts": {
     "serve": "webpack-dev-server",
     "build:cdn": "webpack --mode=production --cdn & webpack --mode=production --cdn --minify",
     "build": "webpack --mode=production && npm run build:cdn",
-    "lint": "eslint '**/*.js' --fix"
+    "lint": "./node_modules/.bin/eslint 'src/**/*.js' --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
