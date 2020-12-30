@@ -1,7 +1,7 @@
 {
-  "name": "@toast-ui/editor-plugin-font-size",
+  "name": "tui-font-size-picker",
   "version": "1.0.0",
-  "description": "TOAST UI Editor : Font Size Plugin",
+  "description": "A plugin allowing users to change font sizes in the TUI Editor",
   "keywords": [
     "nhn",
     "toast",
@@ -11,7 +11,7 @@
     "plugin",
     "font size"
   ],
-  "main": "dist/toastui-editor-plugin-font-size.js",
+  "main": "dist/font-size-picker.js",
   "files": [
     "dist/*.js",
     "index.d.ts"

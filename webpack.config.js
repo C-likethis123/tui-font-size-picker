@@ -9,11 +9,11 @@ const { name, version, author, license } = require("./package.json")
 const TerserPlugin = require("terser-webpack-plugin")
 
 function getOutputConfig(isProduction, isCDN, minify) {
-  const filename = `toastui-${name.replace(/@toast-ui\//, "")}`
+  const filename = `${name.replace("tui-", "")}`
 
   if (!isProduction || isCDN) {
     const config = {
-      library: ["toastui", "Editor", "plugin", "fontSizePlugin"],
+      library: ["toastui", "Editor", "plugin", "fontSizePicker"],
       libraryExport: "default",
       libraryTarget: "umd",
       path: path.resolve(__dirname, "dist/cdn"),
