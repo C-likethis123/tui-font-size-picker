@@ -27,8 +27,6 @@
   },
   "browserslist": "last 2 versions, not ie <= 10",
   "scripts": {
-    "test": "karma start --no-single-run",
-    "test:ne": "cross-env KARMA_SERVER=ne karma start",
     "serve": "webpack-dev-server",
     "build:cdn": "webpack --mode=production --cdn & webpack --mode=production --cdn --minify",
     "build": "webpack --mode=production && npm run build:cdn",
