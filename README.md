@@ -1,35 +1,60 @@
-# nhn-font-plugin
+# tui-font-size-picker
 
 A plugin to help users edit font sizes in the [TUI Editor](https://github.com/nhn/tui.editor)
 
-![Plugin](https://github.com/C-likethis123/nhn-font-size-plugin/blob/master/Font%20Size%20Plugin%20Demo.gif?raw=true)
+![Plugin](https://github.com/C-likethis123/tui-font-size-picker/blob/master/Font%20Size%20Plugin%20Demo.gif?raw=true)
+
+## Features
+
+Supports editing font sizes in both the Markdown and WYSIWYG modes.
 
 ## Installation
 
-TBD
+Install this package with the package manager of your choice.
+
+### npm
+
+`npm install tui-font-size-picker`
+
+### yarn
+
+`yarn add tui-font-size-picker`
 
 ## Usage
 
-TBD
-
 ### ES Modules
 
-TBD
+```javascript
+import fontSizePicker from 'tui-font-size-picker';
+```
 
 ### CommonJS
 
-TBD
+```javascript
+const fontSizePicker = require('tui-font-size-picker')
+```
 
 ### Usage in TUI Editor
 
-TBD
+To use this in the TUI Editor, it is required to install the [TUI Editor](https://github.com/nhn/tui.editor) or its relevant wrappers (eg React, Vue wrappers) in your project. Then create a new Editor instance and the plugin:
 
-## Contributing
+```javascript
+const editor = new Editor({
+  el: document.querySelector('#editor'),
+  previewStyle: 'vertical',
+  height: '500px',
+  initialEditType: 'markdown',
+  initialValue: 'Hello!',
+  plugins: [fontSizePicker] // include the font size picker as a plugin
+});
+```
 
-Clone this repository: `git clone https://github.com/C-likethis123/nhn-font-size-plugin`
+## Developing
 
-Install dependencies: `yarn install`
+Clone this repository: `git clone https://github.com/C-likethis123/tui-font-size-picker`
 
-To run: `yarn serve` or `npm serve`
+Install dependencies: `yarn install` or `npm install`
+
+To run: `yarn serve` or `npm run serve`
 
 Navigate to `localhost:8080/demo/editor.html` to load the demo.
